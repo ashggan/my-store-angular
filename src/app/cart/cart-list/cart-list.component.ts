@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { cartItem } from 'src/app/models/cartItem';
 import { AppState } from 'src/app/state/app.state';
 import { getCartItems } from 'src/app/state/cart/cart.action';
-import { selectAllCart } from 'src/app/state/cart/cart.selectors';
+import { cartTotal, selectAllCart } from 'src/app/state/cart/cart.selectors';
 
 @Component({
   selector: 'app-cart-list',
@@ -13,13 +13,13 @@ import { selectAllCart } from 'src/app/state/cart/cart.selectors';
 })
 export class CartListComponent {
   cartItems$: Observable<cartItem[]>;
+  cartTotal$: Observable<number>;
 
   constructor(private store: Store<AppState>) {
     this.cartItems$ = this.store.pipe(select(selectAllCart));
+    this.cartTotal$ = this.store.pipe(select(cartTotal));
   }
   ngOnInit() {
-    // console.log(this.cartItems$);
-
     this.store.dispatch(getCartItems());
   }
 }

@@ -5,5 +5,7 @@ import { cartState } from './cart.reducer';
 export const selectCart = (state: AppState) => state.cart;
 export const selectAllCart = createSelector(
   selectCart,
-  (state) => state.cartcartItems
+  (state) => state.cartItems
 );
+
+export const cartTotal = createSelector(selectCart, (state) => state.total);

@@ -1,6 +1,9 @@
 import { Product } from './product';
 
 export class cartItem {
+  static getCartTotal(cartcartItems: cartItem[]): number {
+    throw new Error('Method not implemented.');
+  }
   product: Product;
   quantity: number;
 
