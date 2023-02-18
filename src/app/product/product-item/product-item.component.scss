@@ -1,0 +1,30 @@
+.card{ 
+    // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    width: 18rem;
+    border: 0;
+    border-radius: 0%;
+    border-bottom: 3px solid #3DC1CB;
+    background: #f9f9f996;
+
+    &:hover{
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; 
+        transition: all .5s ease-in-out;  
+    }
+
+    img{
+        cursor: pointer;
+        height: 226px;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+ }
+
+ .btn-color{
+    background: #3DC1CB;
+    color: beige;
+ }
+
+ 
+
+ 

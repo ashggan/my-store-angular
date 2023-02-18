@@ -1,0 +1,15 @@
+<div class="container my-5">
+    <div class="row mb-5">
+        <h1 class="fs-3" >My Cart</h1> 
+    </div>
+    <div class="row">
+        <div class="col-md-6" >
+            <div *ngFor="let cartItem of cartItems$ | async">
+                <app-cart-item [cartItem]="cartItem" ></app-cart-item> 
+            </div>
+        </div>
+        <div class="col-md-4">
+            <app-check-out-form></app-check-out-form>
+        </div>
+    </div>
+</div>

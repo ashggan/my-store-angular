@@ -1,3 +1,6 @@
+.img-style{
+    object-fit: cover;
+}
 .detail{
     // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; 
@@ -7,4 +10,8 @@
     border: 0;
     border-bottom: 5px solid #3DC1CB;
     background: #f9f9f996;
+}
+
+.link{
+    cursor: pointer;
 }
