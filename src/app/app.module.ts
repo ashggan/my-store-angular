@@ -14,6 +14,7 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { StoreModule } from '@ngrx/store';
 import { cartReducer } from './state/cart/cart.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { UserReducer } from './state/user/user.reducer';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -27,7 +28,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     CartModule,
     HttpClientModule,
     // StoreModule.forFeature('cart', cartReducer),
-    StoreModule.forRoot({ cart: cartReducer }),
+    StoreModule.forRoot({ cart: cartReducer, user: UserReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: !isDevMode(),

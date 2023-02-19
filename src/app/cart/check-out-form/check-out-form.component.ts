@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from 'src/app/models/user';
 import { checkOut } from 'src/app/state/cart/cart.action';
+import { setUser } from 'src/app/state/user/user.action';
 
 @Component({
   selector: 'app-check-out-form',
@@ -16,17 +17,19 @@ export class CheckOutFormComponent {
     this.user = {
       name: '',
       address: '',
-      c_card: '',
+      credit_card: '',
     };
   }
 
   ngOnInit() {}
 
   checkOut() {
-    console.log(this.user);
     this.store.dispatch(checkOut());
+    this.store.dispatch(setUser({ newUser: this.user }));
     this.router.navigate(['/check-out']);
   }
 
-  goHome() {}
+  goHome() {
+    this.router.navigate(['/product']);
+  }
 }

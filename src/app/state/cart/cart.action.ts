@@ -7,5 +7,5 @@ export const addToCart = createAction(
 );
 
 export const getCartItems = createAction('[Cart Component] get all cart items');
-export const getCartTotal = createAction('[Cart Component] Get cart total');
+
 export const checkOut = createAction('[Cart Component] checkOut');

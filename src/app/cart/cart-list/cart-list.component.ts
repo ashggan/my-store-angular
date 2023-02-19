@@ -19,6 +19,7 @@ export class CartListComponent {
     this.cartItems$ = this.store.pipe(select(selectAllCart));
     this.cartTotal$ = this.store.pipe(select(cartTotal));
   }
+
   ngOnInit() {
     this.store.dispatch(getCartItems());
   }

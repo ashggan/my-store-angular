@@ -1,6 +1,6 @@
-import { on, createReducer, INITIAL_STATE } from '@ngrx/store';
+import { on, createReducer } from '@ngrx/store';
 import { cartItem } from 'src/app/models/cartItem';
-import { addToCart, checkOut, getCartItems, getCartTotal } from './cart.action';
+import { addToCart, checkOut, getCartItems } from './cart.action';
 
 export interface cartState {
   cartItems: cartItem[];
@@ -21,7 +21,7 @@ export const cartReducer = createReducer(
       cartTotal(state.cartItems) + content.product.price * content.quantity,
   })),
   on(getCartItems, (state) => ({ ...state })),
-  on(checkOut, (state) => ({ ...state, cartcartItems: [], total: 0 }))
+  on(checkOut, (state) => ({ ...state, cartItems: [], total: 0 }))
 );
 
 const cartTotal = (arr: cartItem[]): number => {

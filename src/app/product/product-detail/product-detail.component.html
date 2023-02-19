@@ -12,7 +12,7 @@
                 <h2><b>{{product.name}}</b> </h2>
                 <p>{{product.description}}</p>
                 <h4>{{product.price}} $</h4> 
-                <input type="number" placeholder="quantity" min="1" class="
+                <input type="number" [(ngModel)]="quantity" placeholder="quantity" min="1" class="
                 form-control mb-4">
                 <button class="btn btn-success  mb-4" (click)="addToCart()">Add to Cart</button>
                 <a  class=" link" (click)="goHome()">Back to products</a>
