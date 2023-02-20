@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
 import { cartItem } from '../models/cartItem';
+import { CheckOutInfo } from '../models/CheckOutInfo';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   cartList: cartItem[] = [];
-
-  constructor() {}
+  checkout_info: CheckOutInfo;
+  constructor() {
+    this.checkout_info = {
+      name: '',
+      total: 0,
+      items_count: 0,
+    };
+  }
 
   addToCart(newItem: cartItem) {
     let item = this.cartList.find(
@@ -34,7 +42,13 @@ export class CartService {
     return total;
   }
 
-  checkOut() {
+  checkOut(user: User) {
+    this.checkout_info = {
+      name: user.name,
+      total: this.getTotalItems(),
+      items_count: this.cartList.length,
+    };
+
     this.cartList = [];
   }
 }

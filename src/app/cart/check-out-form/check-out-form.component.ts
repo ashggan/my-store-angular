@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user';
 })
 export class CheckOutFormComponent {
   user: User;
-  @Output() checkOut: EventEmitter<void> = new EventEmitter();
+  @Output() checkOut: EventEmitter<User> = new EventEmitter();
   constructor() {
     this.user = {
       name: '',
@@ -19,7 +19,7 @@ export class CheckOutFormComponent {
 
   ngOnInit() {}
 
-  check() {
-    this.checkOut.emit();
+  check(user: User) {
+    this.checkOut.emit(user);
   }
 }
