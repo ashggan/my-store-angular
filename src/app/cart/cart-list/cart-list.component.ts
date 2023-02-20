@@ -29,7 +29,7 @@ export class CartListComponent {
 
   checkOut(user: User) {
     this.total = this.cartService.getTotalItems();
-    if (this.total === 0) alert(`You have items in your cart !`);
+    if (this.total === 0) alert(`You have no items in your cart !`);
     else {
       this.cartService.checkOut(user);
       this.total = this.cartService.getTotalItems();

@@ -1,11 +1,17 @@
 <div class="card ">
     <img src="{{product.url}}"   (click)="showProduct(product.id)" class="card-img-top object-fit-contain" alt="{{product.name}} " >
     <div class="card-body">
-    <h5 class="card-title"> {{product.name}}  </h5> 
+    <h5 class="card-title"> {{product.name}}  </h5>  
     <h5 class="card-subtitle"><b>{{product.price}} $</b> </h5>
         <div class="row my-3">
             <div class="col-md-6">
-                <input type="number" class="form-control" min="1" [(ngModel)]="quantity">
+                <input 
+                    type="number" 
+                    class="form-control" 
+                    min="1" 
+                    [ngModel]="quantity"
+                    (ngModelChange)="changeQuantity($event)"
+                    >
             </div>
             <div class="col-md-6 ">
                 <button (click)="add(product)" class="btn btn-color">Add to cart</button>

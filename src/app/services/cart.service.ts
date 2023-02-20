@@ -51,4 +51,10 @@ export class CartService {
 
     this.cartList = [];
   }
+
+  inCart(product_id: number): boolean {
+    let item = this.cartList.find((item) => item.product.id === product_id);
+
+    return item ? true : false;
+  }
 }

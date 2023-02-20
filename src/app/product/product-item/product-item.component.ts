@@ -12,6 +12,7 @@ export class ProductItemComponent {
   @Input() product: Product;
   @Output() addToCart: EventEmitter<cartItem> = new EventEmitter();
   quantity: number;
+  cartService: any;
 
   constructor(private router: Router) {
     this.product = {
@@ -33,5 +34,9 @@ export class ProductItemComponent {
   add(product: Product) {
     const cartItem = { product, quantity: this.quantity };
     this.addToCart.emit(cartItem);
+  }
+
+  changeQuantity(val: number) {
+    this.quantity = val;
   }
 }

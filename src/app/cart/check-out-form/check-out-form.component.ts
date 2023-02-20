@@ -9,6 +9,7 @@ import { User } from 'src/app/models/user';
 export class CheckOutFormComponent {
   user: User;
   @Output() checkOut: EventEmitter<User> = new EventEmitter();
+
   constructor() {
     this.user = {
       name: '',
