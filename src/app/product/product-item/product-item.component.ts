@@ -1,8 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { addToCart } from 'src/app/state/cart/cart.action';
-import { Store } from '@ngrx/store';
 import { cartItem } from 'src/app/models/cartItem';
 
 @Component({
@@ -12,10 +10,10 @@ import { cartItem } from 'src/app/models/cartItem';
 })
 export class ProductItemComponent {
   @Input() product: Product;
+  @Output() addToCart: EventEmitter<cartItem> = new EventEmitter();
   quantity: number;
-  cartItem: cartItem;
 
-  constructor(private router: Router, private store: Store) {
+  constructor(private router: Router) {
     this.product = {
       id: 0,
       name: '',
@@ -24,19 +22,16 @@ export class ProductItemComponent {
       url: '',
     };
     this.quantity = 1;
-    this.cartItem = {
-      product: this.product,
-      quantity: this.quantity,
-    };
   }
+
   ngOnInit() {}
 
   showProduct(product_id: number) {
     this.router.navigate(['/product', product_id]);
   }
 
-  addTocart() {
-    this.cartItem = { product: this.product, quantity: this.quantity };
-    this.store.dispatch(addToCart({ content: this.cartItem }));
+  add(product: Product) {
+    const cartItem = { product, quantity: this.quantity };
+    this.addToCart.emit(cartItem);
   }
 }

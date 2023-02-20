@@ -1,9 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { User } from 'src/app/models/user';
-import { checkOut } from 'src/app/state/cart/cart.action';
-import { setUser } from 'src/app/state/user/user.action';
 
 @Component({
   selector: 'app-check-out-form',
@@ -12,8 +8,8 @@ import { setUser } from 'src/app/state/user/user.action';
 })
 export class CheckOutFormComponent {
   user: User;
-
-  constructor(private router: Router, private store: Store) {
+  @Output() checkOut: EventEmitter<void> = new EventEmitter();
+  constructor() {
     this.user = {
       name: '',
       address: '',
@@ -23,13 +19,7 @@ export class CheckOutFormComponent {
 
   ngOnInit() {}
 
-  checkOut() {
-    this.store.dispatch(checkOut());
-    this.store.dispatch(setUser({ newUser: this.user }));
-    this.router.navigate(['/check-out']);
-  }
-
-  goHome() {
-    this.router.navigate(['/product']);
+  check() {
+    this.checkOut.emit();
   }
 }

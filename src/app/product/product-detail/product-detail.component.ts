@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { cartItem } from 'src/app/models/cartItem';
 import { Product } from 'src/app/models/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
-import { addToCart } from 'src/app/state/cart/cart.action';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,8 +19,8 @@ export class ProductDetailComponent {
   constructor(
     private activeRoute: ActivatedRoute,
     private productService: ProductService,
-    private router: Router,
-    private store: Store
+    private cartService: CartService,
+    private router: Router
   ) {
     this.product = {
       id: 1,
@@ -36,6 +35,7 @@ export class ProductDetailComponent {
       quantity: this.quantity,
     };
   }
+
   ngOnInit(): void {
     this.product_id = Number(this.activeRoute.snapshot.paramMap.get('id'));
 
@@ -48,11 +48,9 @@ export class ProductDetailComponent {
     this.router.navigate(['/']);
   }
 
-  addToCart() {
-    if (this.product) {
-      this.cartItem = { product: this.product, quantity: this.quantity };
-      this.store.dispatch(addToCart({ content: this.cartItem }));
-      alert('added to cart');
-    }
+  add(product: Product) {
+    const cartItem = { product, quantity: this.quantity };
+    this.cartService.addToCart(cartItem);
+    alert(`${cartItem.product.name} is added to your cart`);
   }
 }

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { cartItem } from 'src/app/models/cartItem';
-import { AppState } from 'src/app/state/app.state';
-import { getCartItems } from 'src/app/state/cart/cart.action';
-import { cartTotal, selectAllCart } from 'src/app/state/cart/cart.selectors';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -12,15 +11,32 @@ import { cartTotal, selectAllCart } from 'src/app/state/cart/cart.selectors';
   styleUrls: ['./cart-list.component.scss'],
 })
 export class CartListComponent {
-  cartItems$: Observable<cartItem[]>;
-  cartTotal$: Observable<number>;
+  cartList: cartItem[] = [];
+  total: number;
 
-  constructor(private store: Store<AppState>) {
-    this.cartItems$ = this.store.pipe(select(selectAllCart));
-    this.cartTotal$ = this.store.pipe(select(cartTotal));
+  constructor(private cartService: CartService, private router: Router) {
+    this.cartList = cartService.cartList;
+    this.total = cartService.getTotalItems();
   }
 
-  ngOnInit() {
-    this.store.dispatch(getCartItems());
+  ngOnInit() {}
+
+  removeItem(item: cartItem) {
+    this.cartService.removeItem(item);
+    this.cartList = this.cartService.cartList;
+    this.total = this.cartService.getTotalItems();
+    alert(`${item.product.name} is remove from your cart`);
+  }
+
+  checkOut() {
+    // this.router.navigate(['/check-out', 'test']);
+    this.total = this.cartService.getTotalItems();
+    if (this.total === 0) alert(`You have items in your cart !`);
+    else {
+      this.cartService.checkOut();
+      this.total = this.cartService.getTotalItems();
+      this.cartList = this.cartService.cartList;
+      this.router.navigate(['/check-out']);
+    }
   }
 }
