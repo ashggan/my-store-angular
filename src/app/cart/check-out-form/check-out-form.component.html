@@ -24,11 +24,10 @@
     </div>
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">  Credit card </label>
-        <input type="text" class="form-control" maxlength="19" minlength="16" name="credit_card
+        <input type="number" class="form-control" maxlength="19" minlength="16" name="credit_card
         "  placeholder=" 1234 3453 567567" [(ngModel)]="user.credit_card" required>
     </div>
     <div class="my-3 d-grid gap-2">
         <button type="submit" [disabled]="form.invalid" class="btn btn-success">Check Out</button>
     </div>
-</form>
-<!--  -->
+</form> 
